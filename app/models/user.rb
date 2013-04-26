@@ -21,6 +21,15 @@ class User < ActiveRecord::Base
    User.find_by_id(session[:user_id])
    end 
   
+  def self.create_with_omniauth(omniauth)
+  create! do |user|
+        if auth['info']
+      user.name = auth['info']['name'] || ""
+      user.email = auth['info']['email'] || ""
+     end
+    end
+   end
+   
      
   class << self
   
@@ -52,6 +61,8 @@ end
  def password_must_be_present
   errors.add(:password, "missing password")unless hashed_password.present?
  end
+ 
+
  
  def generate_salt
     self.salt = self.object_id.to_s + rand.to_s

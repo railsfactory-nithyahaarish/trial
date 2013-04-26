@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
  end
 
  def create 
- if user = User.authenticate(params[:name],params[:password])
+  if 
+ user = User.authenticate(params[:name],params[:password])
  session[:user_id] = user.id
  session[:user_role] = user.role1
  if session[:user_role] == "admin"
@@ -19,7 +20,9 @@ class SessionsController < ApplicationController
  else
  redirect_to login_url, :alert => "invalid"
  end
- end
+end
+
+
 
  def destroy
  session[:user_id] = nil

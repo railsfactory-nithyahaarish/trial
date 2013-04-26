@@ -8,7 +8,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0;
 	padding: 0;
-	background: #554842 url(images/img03.jpg) repeat;
+	background: #554842 url(/assets/img03.jpg) repeat;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 13px;
 	color: #737373;
@@ -169,7 +169,7 @@ img.aligncenter {
 #menu-wrapper {
 	overflow: hidden;
 	height: 60px;
-	background: #DA2F27 url(images/img02.jpg) repeat-x;
+	background: #DA2F27 url(/assets/img02.jpg) repeat-x;
 }
 
 #menu {
@@ -205,7 +205,7 @@ img.aligncenter {
 }
 
 #menu .current_page_item a {
-	background: #9F1615 url(images/img04.jpg) repeat-x;
+	background: #9F1615 url(/assets/img.jpg) repeat-x;
 	color: #FFFFFF;
 }
 
@@ -320,7 +320,7 @@ img.aligncenter {
 #sidebar li li {
 	padding-left: 20px;
 	line-height: 35px;
-	background: url(images/img07.jpg) no-repeat left 14px;
+	background: url(/assets/img07.jpg) no-repeat left 14px;
 }
 
 #sidebar li li span {

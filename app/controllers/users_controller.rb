@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :authorize
+  before_filter :authorize, :except => :facebook_login
   # GET /users
   # GET /users.json
-  before_filter :authorize_admin
+  skip_before_filter :authorize_admin, :only => [:show, :facebook_login]
    def authorize_admin
       if (session[:user_role]== nil) && (User.find_by_id(session[:user_id]))
      redirect_to admin_index_url, :notice => "Unauthorized view"
@@ -15,6 +15,30 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @users }
     end
+  end
+  
+  def facebook_login
+    
+       p omniauth = request.env['omniauth.auth']
+       omniauth.extra.raw_info.email
+       omniauth.extra.raw_info.first_name
+     if  user = User.find_by_Email_id(omniauth.extra.raw_info.email)
+      p "+++++++++++print current user+++++++++++=="
+         p session[:user_id]
+         session[:user_id] = user.id
+           p session[:user_id]        
+        session[:user_role] = user.role1
+       p "++++++++++++END ++++++++++"
+      redirect_to store_index_path
+  else 
+      user = User.new(:Email_id => omniauth.extra.raw_info.email, :name => omniauth.extra.raw_info.first_name)
+      user.save(:validate => false)
+       session[:user_id] = user.id
+           p session[:user_id]        
+        session[:user_role] = user.role1
+         redirect_to store_index_path
+       
+end
   end
 
   # GET /users/1
@@ -48,7 +72,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-
+         
     respond_to do |format|
       if @user.save
       Notifier.new_user_created(@user).deliver 
@@ -65,7 +89,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-   @user = User.find(params[:id])
+   @user = User.(params[:id])
      respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, notice: 'User #{@user.name} was successfully updated.' }

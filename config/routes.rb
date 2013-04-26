@@ -1,6 +1,9 @@
 MyApp1::Application.routes.draw do
 
 
+  resources :payments
+
+
   resources :orders
 
 
@@ -14,7 +17,8 @@ MyApp1::Application.routes.draw do
 
   resources :products
 
-
+  match '/auth/:provider/callback' => 'users#facebook_login'
+  match 'confirm_payment' => 'payments#confirm'
   get "user_dashboard/index"
 
   get "view_page/index"
@@ -80,7 +84,7 @@ MyApp1::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
- root :to => 'sessions#new'
+ root :to => 'store#index'
 
   # See how all your routes lay out with "rake routes"
 
