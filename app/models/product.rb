@@ -10,7 +10,19 @@ class Product < ActiveRecord::Base
     errors[:base] << "Line Items Present"
     return false
    end    
+ end
+ 
+
+
+def self.search(search)
+  if search
+    find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  else
+    find(:all)
   end
+end
+
+
   
   after_create :send_email
   def send_email

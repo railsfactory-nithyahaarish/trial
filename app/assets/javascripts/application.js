@@ -9,7 +9,21 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
-//
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
+
+= require jquery
+= require jquery_ujs
+= require_tree .
+$(function() {
+        likebutton =
+            '<fb:like href="" send="" width="100" show_faces="" ' +
+            'font="" layout="button_count" action="recommend">' +
+            '</fb:like>';
+        $.getScript('https://connect.facebook.net/en_US/all.js', function() {
+                FB.init({appId: 269959526474265,
+                            status: true,
+                            cookie: true,
+                            xfbml: true
+                            });
+                $('#facebook').replaceWith(likebutton);
+        });
+    });

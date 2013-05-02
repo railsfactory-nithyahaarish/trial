@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
       return
       end
     @order = Order.new
-
+    @amount = current_cart.total_price.to_f
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @order }
@@ -44,6 +44,8 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    @cart = Cart.find(params[:id])
+   @amount = @cart.total_price
     @order = Order.new(params[:order])
       @cart = Cart.find(params[:id])
     respond_to do |format|

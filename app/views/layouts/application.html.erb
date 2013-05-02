@@ -21,6 +21,12 @@
 <%end%>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Contact</a></li>
+			<div id="search">
+   <% form_tag products_path, :method => 'get' do %>
+	 <%= submit_tag "Search", :name => nil %> 	
+	 <%= text_field_tag :search, params[:search], :id => 'search_field' %>
+   <%end%>
+  </div>
 			</ul>
 		</div>
 
