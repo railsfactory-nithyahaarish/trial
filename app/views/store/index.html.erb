@@ -8,14 +8,24 @@
 <% @products.each do |product| %>
 <div class="entry">
 <h3><%= product.title %></h3>
+<%= image_tag(product.image_url, :height => "58px", :width => "70px") %>
 <%=sanitize product.description %>
 <div class="price_line">
 <span class="price"><%= product.price %></span>
 <%= button_to 'Add to Cart', line_items_path(:product_id => product)%>
 </div>
-<div id="fb-root"></div><div id="facebook">[Facebook]</div>
-</div>
 <% end %>
 <%= button_to 'login', login_path%>
 <a href="/auth/facebook">Login Via facebook</a>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=375005162618480";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-like" data-href="http://localhost:3000" data-send="true" data-width="450" data-show-faces="true"></div>
+</div>
+</div>
 

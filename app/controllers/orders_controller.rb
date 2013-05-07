@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     if current_cart.line_items.empty?
-      redirect_to store_url :notice => "cart cannot be empty"
+      redirect_to store_path :notice => "cart cannot be empty"
       return
       end
     @order = Order.new

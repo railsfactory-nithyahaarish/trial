@@ -1,5 +1,5 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :price, :title
+  attr_accessible :description, :price, :title, :image_url, :category
     has_many :line_items
   before_destroy :confirm
   
@@ -16,7 +16,7 @@ class Product < ActiveRecord::Base
 
 def self.search(search)
   if search
-    find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    find(:all, :conditions => ['title LIKE ?', "%#{search}%"])
   else
     find(:all)
   end

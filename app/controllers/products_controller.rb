@@ -54,6 +54,15 @@ before_filter :authorize
       end
     end
   end
+  
+  def search
+    p 2322222222222222
+  p  @products = Product.search(params[:search])
+   p '+++++++++++++++++++++++products++++++++++++++++++++'
+   respond_to do |format|
+   format.html { render search_results_products_path }
+ end
+ end
 
   # PUT /products/1
   # PUT /products/1.json

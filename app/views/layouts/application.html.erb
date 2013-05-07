@@ -1,51 +1,89 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+	
+	<!DOCTYPE html>
+<html>
 <head>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Magick Store</title>
-<%=stylesheet_link_tag "scaffold"%>
-<%= stylesheet_link_tag "style", :media => "all"%>
-<%= javascript_include_tag "application"%>
-<%= csrf_meta_tag%>
+  <title>Store</title>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+  <![endif]-->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  	 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="description" content="Rails Sample App">  
+    <meta name="author" content="">  
+    
 </head>
+
 <body>
-<div menu><div id="menu-wrapper">
-		<div id="menu">
-			<ul>
-				<li class="current_page_item"><a href="#">Homepage</a></li>
-				<%if !session[:user_id].blank?%>
-				<li><%= link_to 'Logout', login_path%></li>
-
-<%end%>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Contact</a></li>
-			<div id="search">
-   <% form_tag products_path, :method => 'get' do %>
-	 <%= submit_tag "Search", :name => nil %> 	
-	 <%= text_field_tag :search, params[:search], :id => 'search_field' %>
-   <%end%>
+   
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      
+		 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+		 </a>
+			<a class="brand" href="#">Magick Store</a>
+			<div class="nav-collapse">
+			<ul class="nav">
+			<%if !session[:user_id].blank?%>
+			<li><%= link_to 'Logout', login_path%></li>
+      <%end%>
+			<li><%= link_to "Browse Products", store_index_path %></li>
+			
+			<li class="dropdown" id="accountmenu">  
+			
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories<b class="caret"></b></a>  
+                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="display:block;" aria-hidden="false">  
+											    <li><%= link_to 'Grocery',store_category_path(:category=>'grocery')%></li> 
+                           <li><%= link_to 'Home appliances',store_category_path(:category=>'Home appliances')%></li> 
+                           <li><%= link_to 'Watch',store_category_path(:category=>'Watch')%></li> 
+													  <li><%= link_to 'fruits',store_category_path(:category=>'fruits')%></li> 
+														 <li><%= link_to 'stationery',store_category_path(:category=>'stationery')%></li> 
+														 <li><%= link_to 'Grocery',store_category_path(:category=>'grocery')%></li> 
+														                            </ul>  
+                    <script type="text/javascript">  
+        $(function() {$('.dropdown-toggle').dropdown()});
+				</script>
+										</li>  
+										
+					
+                <li><%= link_to "Contact Us" %></li>
+			<li><%= link_to "Cart" %></li>
+		<%= form_tag :controller => 'products', :action => 'search', :method => 'get' do %>
+     <li> <%= text_field_tag :search, params[:search], :id => 'search_field' %>
+      <%= submit_tag "Search", :name => nil %></li>
+			<% end %>
+     </ul>
+				 </div>
+		 </div>
+          </div>
+           			
+  <div class="container-fluid">
+    <div class="row1-fluid">
+      <div class="span9 offset3">
+			<div class="align-center">
+			<p> 
+						 </p><%= yield %></div>
+						 </div>
+						 </div>
+						 </div>
+						 </div>
+						 </div>
+						 </div>
+						 
+      <div class="span3">
+			 			<h2>About Us</h2>
+       online store for all your needs
+			 with your money to be valued.
+			 We care for your wallet.
+			 </div>
+    </div>
   </div>
-			</ul>
-		</div>
-
-</div><div id="page">
-		<div id="page-bgtop">
-			<div id="page-bgbtm">
-				<div id="content">
-					<div class="post">
-						<h2 class="title"><link_to="store_new_path">Welcome to the Magick store  </a></h2>
-            </div>
-          <div style="clear: both;">&nbsp;</div>
-				</div>
-						
-				<div style="clear: both;">&nbsp;</div>
-			</div>
-		</div>
-	</div>
-
-<%= yield %>
-
-</body>
+	</body>
 </html>
+	 
+	

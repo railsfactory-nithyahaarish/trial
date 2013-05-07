@@ -11,11 +11,16 @@ MyApp1::Application.routes.draw do
 
 
   resources :carts
-
+  
+  resources :products do 
+    get "search_results", :on => :collection
+  end
 
   get "store/index"
-
-  resources :products
+  get "products/search"
+  post "products/search"
+  get "store/category"
+ 
 
   match '/auth/:provider/callback' => 'users#facebook_login'
   match 'confirm_payment' => 'payments#confirm'
