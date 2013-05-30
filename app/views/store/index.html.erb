@@ -15,8 +15,11 @@
 <%= button_to 'Add to Cart', line_items_path(:product_id => product)%>
 </div>
 <% end %>
+<%if session[:user_id].blank?%>
 <%= button_to 'login', login_path%>
-<a href="/auth/facebook">Login Via facebook</a>
+<a href="/auth/facebook">Login Via facebook</a></br>
+<a href="/auth/twitter">Login Via Twitter</a>
+<% end %>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -26,6 +29,11 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <div class="fb-like" data-href="http://localhost:3000" data-send="true" data-width="450" data-show-faces="true"></div>
+
 </div>
 </div>
 
+<%= form_tag users_user_tweet_path do %>
+<%= text_field_tag :tweet_content %>
+<%= submit_tag "Tweet" %>
+	<% end %>

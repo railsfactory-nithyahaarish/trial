@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   if session[:user_id]
  session[:user_id] = nil
  redirect_to login_url, :notice => "logged out"
-  end
+   end
  end
 
  def create 
@@ -26,6 +26,6 @@ end
 
  def destroy
  session[:user_id] = nil
- redirect_to login_url, :notice => "logged out"
+  redirect_to login_url, :notice => "logged out"
  end
 end

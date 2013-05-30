@@ -22,11 +22,16 @@ MyApp1::Application.routes.draw do
   get "store/category"
  
 
-  match '/auth/:provider/callback' => 'users#facebook_login'
+  match '/auth/facebook/callback' => 'users#facebook_login'
+  match '/auth/twitter/callback' => 'users#twitter_login'
+  
   match 'confirm_payment' => 'payments#confirm'
   get "user_dashboard/index"
 
   get "view_page/index"
+ 
+  post "users/user_tweet"
+  
 
  get "admin/index"
  controller :sessions do
@@ -37,7 +42,9 @@ MyApp1::Application.routes.draw do
   delete 'logout' => :destroy
  end 
 
-  resources :users
+  resources :users do
+   put 'upload', :on => :collection
+end   
 
 
   # The priority is based upon order of creation:

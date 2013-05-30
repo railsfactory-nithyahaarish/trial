@@ -1,4 +1,6 @@
 class StoreController < ApplicationController
+  require "rubygems"
+  require "twitter"
   
   def index
     @products = Product.all
@@ -10,6 +12,7 @@ def search
    p '+++++++++++++++++++++++products++++++++++++++++++++'
 end
 end
+
 def category
   p params[:category]
   @product=Product.find_by_category(params[:category])

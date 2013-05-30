@@ -1,6 +1,7 @@
 	
 	<!DOCTYPE html>
 <html>
+<html lang="en">
 <head>
   <title>Store</title>
   <!--[if lt IE 9]>
@@ -34,11 +35,11 @@
       <%end%>
 			<li><%= link_to "Browse Products", store_index_path %></li>
 			
-			<li class="dropdown" id="accountmenu">  
-			
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories<b class="caret"></b></a>  
-                       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" style="display:block;" aria-hidden="false">  
-											    <li><%= link_to 'Grocery',store_category_path(:category=>'grocery')%></li> 
+				<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <b class="caret"></b>
+                       <ul class="dropdown-menu"  aria-labelledby="dLabel" style="display" >  
+											 
+                            <li><%= link_to 'Grocery',store_category_path(:category=>'grocery')%></li> 
                            <li><%= link_to 'Home appliances',store_category_path(:category=>'Home appliances')%></li> 
                            <li><%= link_to 'Watch',store_category_path(:category=>'Watch')%></li> 
 													  <li><%= link_to 'fruits',store_category_path(:category=>'fruits')%></li> 

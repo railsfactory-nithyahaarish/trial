@@ -1,10 +1,18 @@
 require 'digest/sha2'
 class User < ActiveRecord::Base
-  
- attr_accessible :name, :password, :password_confirmation, :role1, :Email_id
+   has_attached_file :media,
+       :styles => {
+       :thumb=> "100x100#",
+       :small  => "400x400>" },  
+     :storage => :s3,
+     :s3_credentials => "#{Rails.root}/config/s3.yml",
+    :path => "/images/:id/:style.:extension",
+    :url => ":s3_domain_url"
+ attr_accessible :name, :password, :password_confirmation, :role1, :Email_id, :media
+ has_attached_file :media
   validates :name, :presence => true, :uniqueness => true
+    after_create :send_mail
   
-  after_create :send_mail
   def send_mail
    Notifier.new_user_created(self).deliver 
    p 1111111111111111111111111111
@@ -21,6 +29,8 @@ class User < ActiveRecord::Base
    User.find_by_id(session[:user_id])
    end 
   
+ 
+
   def self.create_with_omniauth(omniauth)
   create! do |user|
         if auth['info']

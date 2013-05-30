@@ -19,6 +19,9 @@
   <%= @user.salt %>
 </p>
 
-
+<%= form_tag  upload_users_path, :multipart => true, :method =>"put" do %>
+  <%= file_field_tag :media %>
+  <%= submit_tag "upload"%>
+<% end %>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', user_path %>
